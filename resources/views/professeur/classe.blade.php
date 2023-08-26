@@ -167,7 +167,7 @@
                             <div class="col-4 mg-tb-15">
                                 <p class="text-center justify-content-center mg-tb-30">
                                     <button class="btn btn-primary btn-lg waves-effect waves-light p-lg-5">
-                                        <a href="">
+                                        <a href="{{ route('moi') }}">
                                             <span style="color:white; font-family:'comic sans ms', sans-serif">
                                                 Porter des notes
                                             </span>

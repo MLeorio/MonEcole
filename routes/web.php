@@ -141,3 +141,5 @@ Route::middleware('isLogin')->group(function () {
 // Autres routes
 
 Route::get('/test', [ProfTacheController::class, 'addNote'])->name('req');
+
+Route::get('/moi', [ProfTacheController::class, 'addNote'])->name('moi');
