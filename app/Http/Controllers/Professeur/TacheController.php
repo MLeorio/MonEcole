@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class TacheController extends Controller
 {
-    //
+    public function addNote()
+    {
+        dd('salut');
+    }
 }

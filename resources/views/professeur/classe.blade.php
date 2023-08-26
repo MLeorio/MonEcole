@@ -167,9 +167,9 @@
                             <div class="col-4 mg-tb-15">
                                 <p class="text-center justify-content-center mg-tb-30">
                                     <button class="btn btn-primary btn-lg waves-effect waves-light p-lg-5">
-                                        <a href="{{ route('classe.setting', ['classe' => $classe]) }}">
+                                        <a href="">
                                             <span style="color:white; font-family:'comic sans ms', sans-serif">
-                                                Param&egrave;tres de la classe
+                                                Porter des notes
                                             </span>
                                         </a>
                                     </button>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Personnel\MatiereController;
 use App\Http\Controllers\Personnel\ProfesseurController;
 use App\Http\Controllers\Professeur\ClasseController as ProfClasseController;
 use App\Http\Controllers\Professeur\MatiereController as ProfMatiereController;
+use App\Http\Controllers\Professeur\TacheController as ProfTacheController;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,4 +140,4 @@ Route::middleware('isLogin')->group(function () {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Autres routes
 
-Route::get('/test/{prof}', [HomeController::class, 'test'])->name('req');
+Route::get('/test', [ProfTacheController::class, 'addNote'])->name('req');
