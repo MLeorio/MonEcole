@@ -161,9 +161,9 @@ class ClasseController extends Controller
         $matiere = Matiere::findorFail($request['matiere']);
         $prof = Professeur::findorFail($request['prof']);
 
-        // dd($classe, $matiere, $prof, $role);
-
         $classe->matieres()->attach($matiere, ['professeur_id' => $prof['id'], 'annee-scolaire'=> date('Y'), 'role' => $role]);
+
+        return redirect()->back()->with('success', "C'est parfait");
 
     }
 }
