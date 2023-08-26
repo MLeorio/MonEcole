@@ -59,9 +59,9 @@
 
                                     <p>
 
-                                        @if ($classe->eleves->count() == 0)
+                                        @if ($classe->eleves()->where('annee-scolaire', date('Y'))->get()->count() == 0)
                                             <strong class="text-danger">Pas d'&eacute;l&egrave;ve inscrit !</strong>
-                                        @elseif ($classe->eleves->count() == 1)
+                                        @elseif ($classe->eleves()->where('annee-scolaire', date('Y'))->get()->count() == 1)
                                             <span><i class="fa fa-users"></i></span>
                                             Effectif : <b class="text-info">{{ $classe->eleves->count() }}
                                                 &eacute;l&egrave;ve</b>

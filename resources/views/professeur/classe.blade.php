@@ -11,8 +11,8 @@
                 <a href="{{ route('homePers') }}" title="La maison">Accueil</a> <span class="bread-slash">></span>
             </li>
             <li>
-                <a href="{{ route('classe.list') }}" title="liste des classes" style="font-weight:500">
-                    Liste des classes</a> <span class="bread-slash">></span>
+                <a href="{{ route('prof.classes') }}" title="liste des classes" style="font-weight:500">
+                    Mes classes</a> <span class="bread-slash">></span>
             </li>
             <li>
                 <span class="bread-blod text-primary" style="font-weight:bold">{{ $classe['libelle'] }}</span>
@@ -81,7 +81,10 @@
                                                 <strong class="text-primary"> {{ $classe->eleves->count() }}</strong>
                                             </span>
 
-                                            {{-- Partie pour afficher le titulaire d'une classe --}}
+                                            <span>
+                                                <i class="fa fa-info"></i> Nombre de cours :
+                                                <strong class="text-primary"> {{ $matieres->count() }}</strong>
+                                            </span>
 
                                         </div>
                                         <h1><a class="blog-ht" href="#">Commantaires sur la classe</a></h1>
@@ -101,80 +104,33 @@
                         <div class="row">
                             <div class="col-md12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="comment-head">
-                                    <h3>Liste des &eacute;l&egrave;ves de la classe</h3>
+                                    <h3>Mati&egrave;re(s) enseign&eacute;e(s)</h3>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="coment-area">
-                                <div class="datatable-dashv1-list custom-datatable-overright">
-                                    <div id="toolbar">
-                                        <select class="form-control dt-tb">
-                                            <option value="">Exportation Basique</option>
-                                            <option value="all">Tout Exporter</option>
-                                            <option value="selected">Exporter Selection</option>
-                                        </select>
-                                    </div>
-                                    <table id="table" data-toggle="table" data-pagination="true" data-search="true"
-                                        data-show-columns="true" data-show-pagination-switch="true"
-                                        data-show-refresh="true"
-                                        aria-describedby="table" data-key-events="true" data-show-toggle="true"
-                                        data-resizable="true" data-cookie="true" data-cookie-id-table="saveId"
-                                        data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
-                                        <thead style="text-align: center">
-                                            <tr style="text-align: center">
-                                                <th data-field="state" data-checkbox="true"></th>
-                                                <th data-field="id">N°</th>
-                                                <th data-field="code" data-editable="true">Nom</th>
-                                                <th data-field="libelle" data-editable="true">Pr&eacute;nom(s)</th>
-                                                <th data-field="task" data-editable="true">Date de naissance</th>
-                                                <th data-field="nation" data-editable="true">Nationnalit&eacute;</th>
-                                                <th data-field="action">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @php
-                                                $n = 1;
-                                            @endphp
-                                            @foreach ($classe->eleves as $eleve)
-                                                <tr>
-                                                    <td></td>
-                                                    <td>{{ $n }}</td>
-                                                    <td>{{ $eleve->nom }}</td>
-                                                    <td>{{ $eleve->prenom }}</td>
-                                                    <td>{{ date('d M. Y', strtotime($eleve->birthday)) }}</td>
-                                                    <td>{{ $eleve->nationalite }}</td>
-                                                    <td class="datatable-ct">
-                                                        <a href="" style="margin: 20px; font-size:18px"><i
-                                                                class="fa fa-eye"></i></a>
-                                                        <i class="fa fa-trash text-danger"></i>
-                                                    </td>
-                                                </tr>
-                                                @php
-                                                    $n++;
-                                                @endphp
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br><br>
-
-                        <div class="row mg-tb-30">
-                            <div class="col-4"></div>
-                            <div class="col-4 mg-tb-15">
-                                <p class="text-center justify-content-center mg-tb-30">
-                                    <button class="btn btn-primary btn-lg waves-effect waves-light p-lg-5">
-                                        <a href="{{ route('moi') }}">
-                                            <span style="color:white; font-family:'comic sans ms', sans-serif">
-                                                Porter des notes
-                                            </span>
+                        <div class="row mg-b-15" style="margin-bottom: 30px">
+                            @forelse ($matieres as $matiere)
+                                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="courses-inner res-mg-b-30">
+                                        <a href="{{ route('prof.matiere', ['classe' => $classe, 'matiere' => $matiere]) }}">
+                                            <div class="courses-title">
+                                                <img src="{{ asset('base/img/courses/1.jpg') }}" alt="">
+                                                <h2>{{ $matiere['libelle'] }} :
+                                                    <strong class="text-primary" style="text-transform:uppercase">
+                                                        {{ $matiere['code'] }}</strong>
+                                                </h2>
+            
+                                            </div>
                                         </a>
-                                    </button>
-                                </p>
-                            </div>
+                                    </div>
+                                </div>
+            
+                            @empty
+                                <strong>
+                                    <center style="margin: 50px; font-size:32px; color:blue">
+                                        Aucune classe encore enregistr&eacute;e !</center>
+                                </strong>
+                            @endforelse
                         </div>
 
                         <br><br><br>

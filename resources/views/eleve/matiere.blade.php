@@ -145,12 +145,12 @@
                                                                                                 <td>{{ $note['typeNote'] }}
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    @if ($note['note'] >= 10)
-                                                                                                        <i class="fa fa-level-up"></i>
-                                                                                                    @else
-                                                                                                        <i class="fa fa-level-down"></i>
-                                                                                                    @endif
                                                                                                     <span class="text-bold">{{ $no }}</span>
+                                                                                                    @if ($note['note'] >= 10)
+                                                                                                        <i class="fa fa-level-up text-success"></i>
+                                                                                                    @else
+                                                                                                        <i class="fa fa-level-down text-danger"></i>
+                                                                                                    @endif
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <span class="pie">{{ $no }}/ 20</span>
@@ -236,12 +236,12 @@
                                                                                                 <td>{{ $note['typeNote'] }}
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    @if ($note['note'] >= 10)
-                                                                                                        <i class="fa fa-level-up"></i>
-                                                                                                    @else
-                                                                                                        <i class="fa fa-level-down"></i>
-                                                                                                    @endif
                                                                                                     <span class="text-bold">{{ $no }}</span>
+                                                                                                    @if ($note['note'] >= 10)
+                                                                                                        <i class="fa fa-level-up text-success"></i>
+                                                                                                    @else
+                                                                                                        <i class="fa fa-level-down text-danger"></i>
+                                                                                                    @endif
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <span class="pie">{{ $no }}/ 20</span>
@@ -327,12 +327,12 @@
                                                                                             <td>{{ $note['typeNote'] }}
                                                                                             </td>
                                                                                             <td>
-                                                                                                @if ($note['note'] >= 10)
-                                                                                                    <i class="fa fa-level-up"></i>
-                                                                                                @else
-                                                                                                    <i class="fa fa-level-down"></i>
-                                                                                                @endif
                                                                                                 <span class="text-bold">{{ $no }}</span>
+                                                                                                @if ($note['note'] >= 10)
+                                                                                                    <i class="fa fa-level-up text-success"></i>
+                                                                                                @else
+                                                                                                    <i class="fa fa-level-down text-danger"></i>
+                                                                                                @endif
                                                                                             </td>
                                                                                             <td>
                                                                                                 <span class="pie">{{ $no }}/ 20</span>

@@ -150,11 +150,20 @@ class ClasseController extends Controller
             'prof' => 'required',
         ]);
 
+        if (isset($request['role']) && $request['role']) {
+            $role = 'Titulaire';
+        }
+        else{
+            $role = 'Professeur';
+        }
+
         $classe = Classe::findorFail($request['classe']);
         $matiere = Matiere::findorFail($request['matiere']);
         $prof = Professeur::findorFail($request['prof']);
 
-        dd($classe, $matiere, $prof);
+        // dd($classe, $matiere, $prof, $role);
+
+        $classe->matieres()->attach($matiere, ['professeur_id' => $prof['id'], 'annee-scolaire'=> date('Y'), 'role' => $role]);
 
     }
 }

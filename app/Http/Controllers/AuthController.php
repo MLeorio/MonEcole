@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Eleve;
 use App\Models\elevee;
 use App\Models\Professeur;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -102,8 +103,11 @@ class AuthController extends Controller
 
     public function logout()
     {
-        if (Session()->has('loginId')) {
-            Session()->pull('loginId');
+        if (Session()->has('user')) {
+            Session()->pull('user');
+            if (Session()->has('classe')) {
+                Session()->pull('classe');
+            }
         }
         return redirect()->route('home');
     }
