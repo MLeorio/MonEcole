@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('enseigners', function (Blueprint $table) {
             $table->id();
 
-            $table->date('annee-scolaire')->nullable(false);
+            $table->string('annee-scolaire')->nullable(false);
             $table->enum('role', ['Titulaire', 'Professeur'])
             ->nullable(false)->default('Professeur');
 

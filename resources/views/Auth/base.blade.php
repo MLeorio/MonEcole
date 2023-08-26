@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/login/log.css') }}">
+	<link rel="shortcut icon" href="{{ asset('base/img/favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>

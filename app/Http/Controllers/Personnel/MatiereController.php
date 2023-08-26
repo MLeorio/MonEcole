@@ -53,7 +53,7 @@ class MatiereController extends Controller
             'description' => $request['description']
         ]);
 
-        return redirect()->route('matiere.list')->with('success', 'Matiere ajouter avec succès');
+        return redirect()->route('matiere.list')->with('success', 'Matiere ajoutée avec succès');
     }
 
     /**

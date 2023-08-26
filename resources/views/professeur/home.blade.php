@@ -4,7 +4,6 @@
     Accueil ~ Professeur
 @endsection
 
-
 @section('menu')
     @include('professeur.nav-prof')
 @endsection
@@ -16,9 +15,7 @@
 @section('brand')
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <ul class="breadcome-menu">
-            <li><a href="#">Tableau de bord </a> <span class="bread-slash">/</span>
-            </li>
-            <li><span class="bread-blod"><strong>Accueil</strong></span>
+            <li><span class="bread-blod"><strong>Accueil</strong>></span>
             </li>
         </ul>
     </div>

@@ -16,14 +16,9 @@ class EleveController extends Controller
      */
     public function index()
     {
-        if (Session()->has('loginId')) {
-            $user = Personnel::where('id', Session()->get('loginId'))->first();
-        }
-
-        $alleleves = Eleve::all();
+        $alleleves = Eleve::all()->sortBy('nom');
 
         return view('personnel.list-eleve', [
-            'data' => $user,
             'eleves' => $alleleves
         ]);
     }
@@ -35,13 +30,7 @@ class EleveController extends Controller
      */
     public function create()
     {
-        if (Session()->has('loginId')) {
-            $user = Personnel::where('id', Session()->get('loginId'))->first();
-        }
-
-        return view('personnel.add-eleve', [
-            'data' => $user
-        ]);
+        return view('personnel.add-eleve');
     }
 
     /**
@@ -52,7 +41,17 @@ class EleveController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Personnel::where('id', Session()->get('loginId'))->first();
+        $request->validate([
+            'name' => 'bail|string|required|max:150',
+            'lastname' => 'bail|string|required|max:255',
+            'gender' => 'bail|string|required|max:10',
+            'birthday' => 'bail|date|required',
+            'adresse' => 'bail|string|required|max:100',
+            'nation' => 'bail|string|required|max:50',
+            'dateEntree' => 'bail|date|required'
+        ]);
+
+        $user = Personnel::where('id', Session()->get('user')['id'])->first();
 
         #Persistance des donnes dans la base de donnes
         $eleve = new Eleve();
@@ -82,8 +81,7 @@ class EleveController extends Controller
 
         $user->eleves()->save($eleve);
 
-
-        return redirect('personnel/dashboard/eleve');
+        return redirect()->back()->with('success', 'Eleve ajouté avec succès');
 
     }
 
@@ -95,12 +93,7 @@ class EleveController extends Controller
      */
     public function show(Eleve $eleve)
     {
-        if (Session()->has('loginId')) {
-            $user = Personnel::where('id', Session()->get('loginId'))->first();
-        }
-
         return view('personnel.eleve-detatil', [
-           'data' => $user,
            'eleve' => $eleve
         ]);
     }
@@ -125,7 +118,25 @@ class EleveController extends Controller
      */
     public function update(Request $request, Eleve $eleve)
     {
-        //
+        $request->validate([
+            'nom' => 'bail|string|required|max:150',
+            'prenom' => 'bail|string|required|max:255',
+            'genre' => 'bail|string|required|max:10',
+            'nationalite' => 'bail|string|required|max:50',
+            'adresse' => 'bail|string|required|max:100',
+            'birthday' => 'bail|date|required'
+        ]);
+
+        $eleve->update([
+            'nom' => $request['nom'],
+            'prenom' => $request['prenom'],
+            'genre' => $request['genre'],
+            'nationalite' => $request['nationalite'],
+            'adresse' => $request['adresse'],
+            'birthday' => $request['birthday']
+        ]);
+        
+        return redirect()->route('eleve.voir', ['eleve' => $eleve])->with('success', 'Modification éffectuée avec succès');
     }
 
     /**

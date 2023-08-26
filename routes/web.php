@@ -53,76 +53,90 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 /**
  * Route d'accueil pour les utilisateurs
  */
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Route pour les personnels
 
-Route::prefix('personnel')->group(function () {
-
-    Route::get("/dashbord", [HomeController::class, 'boardPers'])->name('homePers');
-
-    Route::prefix('matiere')->group(function () {
-        Route::get('/', [MatiereController::class, 'index'])->name('matiere.list');
-        Route::get('/ajouter-matiere', [MatiereController::class, 'create'])->name('matiere.ajouter');
-        Route::get('/{matiere}', [MatiereController::class, 'show'])->name('matiere.voir');
-        Route::post('/add-matiere', [MatiereController::class, 'store'])->name('matiere.save');
-        Route::put('/modifier-matiere/{matiere}', [MatiereController::class, 'update'])->name('matiere.maj');
-        Route::delete('/supprimer-matiere/{matiere}', [MatiereController::class, 'destroy'])->name('matiere.effacer');
+Route::middleware('isLogin')->group(function () {
+    Route::prefix('personnel')->group(function () {
+        Route::get("/dashboard", [HomeController::class, 'boardPers'])->name('homePers');
+    
+        Route::prefix('matiere')->group(function () {
+            Route::get('/', [MatiereController::class, 'index'])->name('matiere.list');
+            Route::get('/ajouter-matiere', [MatiereController::class, 'create'])->name('matiere.ajouter');
+            Route::get('/detail/{matiere}', [MatiereController::class, 'show'])->name('matiere.voir');
+            Route::post('/add-matiere', [MatiereController::class, 'store'])->name('matiere.save');
+            Route::put('/modifier-matiere/{matiere}', [MatiereController::class, 'update'])->name('matiere.maj');
+            Route::delete('/supprimer-matiere/{matiere}', [MatiereController::class, 'destroy'])->name('matiere.effacer');
+        });
+    
+        Route::prefix('professeur')->group(function () {
+            Route::get('/', [ProfesseurController::class, 'index'])->name('professeur.list');
+            Route::get('/ajouter-prof', [ProfesseurController::class, 'create'])->name('professeur.ajouter');
+            Route::get('/detail/{prof}', [ProfesseurController::class, 'show'])->name('professeur.voir');
+            Route::post('/ajouter-prof', [ProfesseurController::class, 'store'])->name('professeur.save');
+            Route::put('/modifier-prof/{prof}', [ProfesseurController::class, 'update'])->name('professeur.maj');
+            Route::delete('/supprimer-prof/{prof}', [ProfesseurController::class, 'destroy'])->name('professeur.effacer');
+        });
+    
+        Route::prefix('classe')->group(function () {
+            Route::get('/', [ClasseController::class, 'index'])->name('classe.list');
+            Route::get('/ajouter-classe', [ClasseController::class, 'create'])->name('classe.ajouter');
+            Route::get('/detail/{classe}', [ClasseController::class, 'show'])->name('classe.voir');
+            Route::post('/ajouter-classe', [ClasseController::class, 'store'])->name('classe.save');
+            Route::put('/modifier-classe/{classe}', [ClasseController::class, 'update'])->name('classe.maj');
+            Route::delete('/supprimer-classe/{classe}', [ClasseController::class, 'destroy'])->name('classe.effacer');
+            
+            Route::get('/detail/reglages/{classe}', [ClasseController::class, 'edit'])->name('classe.setting');
+            Route::post('/admission', [ClasseController::class, 'admission'])->name('classe.admission');
+            Route::post('/programmation-cours', [ClasseController::class, 'cours'])->name('classe.cours');
+        });
+    
+        Route::prefix('eleve')->group(function () {
+            Route::get('/', [EleveController::class, 'index'])->name('eleve.list');
+            Route::get('/ajouter-eleve', [EleveController::class, 'create'])->name('eleve.ajouter');
+            Route::get('/detail/{eleve}', [EleveController::class, 'show'])->name('eleve.voir');
+            Route::post('/ajouter-eleve', [EleveController::class, 'store'])->name('eleve.save');
+            Route::put('/modifier-eleve/{eleve}', [EleveController::class, 'update'])->name('eleve.maj');
+            Route::delete('/supprimer-eleve/{eleve}', [EleveController::class, 'destroy'])->name('eleve.effacer');
+        });
     });
-
+    
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Route pour les professeurs
+    
     Route::prefix('professeur')->group(function () {
-        Route::get('/', [ProfesseurController::class, 'index'])->name('professeur.list');
-        Route::get('/ajouter-prof', [ProfesseurController::class, 'create'])->name('professeur.ajouter');
-        Route::post('/ajouter-prof', [ProfesseurController::class, 'store'])->name('professeur.save');
-        Route::put('/modifier-prof/{prof}', [ProfesseurController::class, 'update'])->name('professeur.maj');
-        Route::delete('/supprimer-prof/{prof}', [ProfesseurController::class, 'destroy'])->name('professeur.effacer');
+    
+        Route::get('/dashboard', [HomeController::class, 'boardProf'])->name('homeProf');
+    
+        Route::prefix('matiere')->group(function () {
+            Route::get('/', [ProfMatiereController::class, 'index'])->name('prof.matieres');
+            Route::get('/{matiere}', [ProfMatiereController::class, 'show'])->name('prof.matiere');
+        });
+    
+        Route::prefix('classe')->group(function () {
+            Route::get('/', [ProfClasseController::class, 'index'])->name('prof.classes');
+            Route::get('/{classe}', [ProfClasseController::class, 'show'])->name('prof.classe');
+        });
     });
-
-    Route::prefix('classe')->group(function () {
-        Route::get('/', [ClasseController::class, 'index'])->name('classe.list');
-        Route::get('/ajouter-classe', [ClasseController::class, 'create'])->name('classe.ajouter');
-        Route::post('/ajouter-classe', [ClasseController::class, 'store'])->name('classe.save');
-        Route::put('/modifier-classe/{classe}', [ClasseController::class, 'update'])->name('classe.maj');
-        Route::delete('/supprimer-classe/{classe}', [ClasseController::class, 'destroy'])->name('classe.effacer');
-    });
-
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Route pour les eleves
+    
     Route::prefix('eleve')->group(function () {
-        Route::get('/', [EleveController::class, 'index'])->name('eleve.list');
-        Route::get('/ajouter-eleve', [EleveController::class, 'create'])->name('eleve.ajouter');
-        Route::post('/ajouter-eleve', [EleveController::class, 'store'])->name('eleve.save');
-        Route::put('/modifier-eleve/{eleve}', [EleveController::class, 'update'])->name('eleve.maj');
-        Route::delete('/supprimer-eleve/{eleve}', [EleveController::class, 'destroy'])->name('eleve.effacer');
+    
+        Route::get('/dashboard', [HomeController::class, 'boardEle'])->name('homeEle');
+    
+        Route::get('/ma-classe', [TacheController::class, 'maclasse'])->name('ma_classe');
+    
+        Route::prefix('matiere')->group(function () {
+            Route::get('/', [TacheController::class, 'mesmatieres'])->name('mes_matieres');
+            Route::get('/{matiere}', [TacheController::class, 'lamatiere'])->name('la_matiere');
+        });
     });
 });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Autres routes
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Route pour les professeurs
-
-Route::prefix('professeur')->group(function () {
-
-    Route::get('/dashboard', [HomeController::class, 'boardProf'])->name('homeProf');
-
-    Route::prefix('matiere')->group(function () {
-        Route::get('/', [ProfMatiereController::class, 'index'])->name('prof.matieres');
-        Route::get('/{matiere}', [ProfMatiereController::class, 'show'])->name('prof.matiere');
-    });
-
-    Route::prefix('classe')->group(function () {
-        Route::get('/', [ProfClasseController::class, 'index'])->name('prof.classes');
-        Route::get('/{classe}', [ProfClasseController::class, 'show'])->name('prof.classe');
-    });
-});
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Route pour les eleves
-
-Route::prefix('eleve')->group(function () {
-
-    Route::get('/dashboard', [HomeController::class, 'boardEle'])->name('homeEle');
-
-    Route::get('/ma-classe', [TacheController::class, 'maclasse'])->name('ma_classe');
-
-    Route::prefix('matiere')->group(function () {
-        Route::get('/mes-matieres', [TacheController::class, 'mesmatieres'])->name('mes_matieres');
-        Route::get('/mes-notes/{matiere}', [TacheController::class, 'mesnotes'])->name('mes_notes');
-    });
-});
+Route::get('/test/{prof}', [HomeController::class, 'test'])->name('req');

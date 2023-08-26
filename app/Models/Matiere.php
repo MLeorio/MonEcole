@@ -31,7 +31,7 @@ class Matiere extends Model
     public function professeurs()
     {
         return $this->belongsToMany(Professeur::class, 'enseigners')
-        ->withPivot('role', 'annee-scolaire')
+        ->withPivot('role', 'annee-scolaire', 'classe_id')
         ->withTimestamps();
     }
 }

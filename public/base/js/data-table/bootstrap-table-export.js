@@ -13,19 +13,19 @@
         png: 'PNG',
         csv: 'CSV',
         txt: 'TXT',
+        pdf: 'PDF',
         sql: 'SQL',
         doc: 'MS-Word',
         excel: 'MS-Excel',
         xlsx: 'MS-Excel (OpenXML)',
-        powerpoint: 'MS-Powerpoint',
-        pdf: 'PDF'
+        powerpoint: 'MS-Powerpoint'
     };
 
     $.extend($.fn.bootstrapTable.defaults, {
         showExport: false,
         exportDataType: 'basic', // basic, all, selected
         // 'json', 'xml', 'png', 'csv', 'txt', 'sql', 'doc', 'excel', 'powerpoint', 'pdf'
-        exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel'],
+        exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel', 'pdf'],
         exportOptions: {}
     });
 
@@ -35,7 +35,7 @@
 
     $.extend($.fn.bootstrapTable.locales, {
         formatExport: function () {
-            return 'Export data';
+            return 'Exporter les données';
         }
     });
     $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales);

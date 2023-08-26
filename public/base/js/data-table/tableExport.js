@@ -82,7 +82,7 @@
           docDefinition: {
             pageOrientation: 'portrait',  // 'portrait' or 'landscape'
             defaultStyle: {
-              font: 'Roboto'              // default is 'Roboto', for arabic font set this option to 'Mirza' and include mirza_fonts.js
+              font: 'Comic sans ms'              // default is 'Roboto', for arabic font set this option to 'Mirza' and include mirza_fonts.js
             }
           },
           fonts: {}

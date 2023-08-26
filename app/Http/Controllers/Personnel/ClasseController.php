@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Personnel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Classe;
+use App\Models\Eleve;
 use App\Models\Matiere;
 use App\Models\Personnel;
+use App\Models\Professeur;
 use Illuminate\Http\Request;
 
 class ClasseController extends Controller
@@ -18,14 +20,9 @@ class ClasseController extends Controller
      */
     public function index()
     {
-        if (Session()->has('loginId')) {
-            $user = Personnel::where('id', Session()->get('loginId'))->first();
-        }
-
-        $allClasses = Classe::all();
+        $allClasses = Classe::all()->sortBy('libelle');
 
         return view('personnel.list-classe', [
-            'data' => $user,
             'classes' => $allClasses
         ]);
     }
@@ -37,13 +34,7 @@ class ClasseController extends Controller
      */
     public function create()
     {
-        if (Session()->has('loginId')) {
-            $user = Personnel::where('id', Session()->get('loginId'))->first();
-        }
-
-        return view('personnel.add-classe', [
-            'data' => $user,
-        ]);
+        return view('personnel.add-classe');
     }
 
     /**
@@ -54,14 +45,19 @@ class ClasseController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'libelle' => 'bail|required|string|max:150',
+            'description' => 'bail|string|max:250',
+            'niveau' => 'bail|string|required|max:15'
+        ]);
+
         Classe::create([
             'libelle' => $request->libelle,
             'description' => $request->description,
             'niveau' => $request->niveau
         ]);
 
-        return redirect('personnel/dashboard/classe');
-
+        return redirect()->route('classe.list')->with('success', "Classe ajoutée avec succès");
     }
 
     /**
@@ -70,20 +66,10 @@ class ClasseController extends Controller
      * @param  \App\Models\Classe  $classe
      * @return \Illuminate\Http\Response
      */
-    public function show(Classe $classe)
+    public function show(Classe $classe, Request $request)
     {
-        if (Session()->has('loginId'))
-        {
-            $user = Personnel::find(Session()->get('loginId'))->first();
-        }
-
-        $matieres = Matiere::all();
-
-
-        return view('personnel.detail-classe', [
-            'data' => $user,
-            'classe' => $classe,
-            'matieres' => $matieres
+        return view('personnel.classe-detail', [
+            'classe' => $classe
         ]);
     }
 
@@ -95,7 +81,16 @@ class ClasseController extends Controller
      */
     public function edit(Classe $classe)
     {
+        $eleves = Eleve::all()->sort();
+        $profs = Professeur::all()->sort();
+        $matieres = Matiere::all();
 
+        return view('personnel.setting-classe', [
+            'classe' => $classe,
+            'eleves' => $eleves,
+            'profs' => $profs,
+            'matieres' => $matieres
+        ]);
     }
 
     /**
@@ -107,7 +102,18 @@ class ClasseController extends Controller
      */
     public function update(Request $request, Classe $classe)
     {
-       dd($request);
+        $request->validate([
+            'libelle' => 'bail|required|string|max:150',
+            'description' => 'bail|string|max:250',
+            'niveau' => 'bail|string|required|max:15'
+        ]);
+       
+        $classe->update([
+            'libelle' => $request['libelle'],
+            'description' => $request['description'],
+            'niveau' => $request['niveau'],
+        ]);
+        return redirect()->back()->with('success', 'Modification éffectuée avec succès !');
     }
 
     /**
@@ -119,5 +125,36 @@ class ClasseController extends Controller
     public function destroy(Classe $classe)
     {
         //
+    }
+
+    public function admission(Request $request)
+    {
+        $request->validate([
+            'classe' => 'required|bail',
+            'eleve' => 'bail|required'
+        ]);
+
+        $classe = Classe::findorFail($request['classe']);
+        $eleve = Eleve::findorFail($request['eleve']);
+
+        $classe->eleves()->attach($eleve, ['annee-scolaire' => date('Y')]);
+        
+        return redirect()->back()->with('success', 'Admission éffectuée avec succès !');
+    }
+
+    public function cours(Request $request)
+    {
+        $request->validate([
+            'classe' => 'required',
+            'matiere' => 'required',
+            'prof' => 'required',
+        ]);
+
+        $classe = Classe::findorFail($request['classe']);
+        $matiere = Matiere::findorFail($request['matiere']);
+        $prof = Professeur::findorFail($request['prof']);
+
+        dd($classe, $matiere, $prof);
+
     }
 }

@@ -16,8 +16,8 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if ( !Session()->has('loginId') ) {
-            return redirect('home')->with('fail', 'Veuillez vous identifier');
+        if ( !Session()->has('user') ) {
+            return redirect('/')->with('fail', "Veuilliez d'abord vous identifier !");
          }
          return $next($request);
     }

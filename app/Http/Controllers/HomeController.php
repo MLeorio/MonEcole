@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Eleve;
-use App\Models\Personnel;
-use App\Models\Professeur;
-use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     public function boardPers()
@@ -21,6 +16,16 @@ class HomeController extends Controller
 
     public function boardEle()
     {
-        return view('eleve.home');
+        $user = Session()->get('user');
+        $classe = $user->classes()->where('annee-scolaire', '2023')->get()->first();
+        $effMasculin = $classe->eleves()->where('genre', 'Masculin')->count();
+        $effFeminin = $classe->eleves()->where('genre', 'Feminin')->count();
+        $effTotal = $classe->eleves->count();
+
+        return view('eleve.home', [
+            'garcon' => $effMasculin,
+            'fille' => $effFeminin,
+            'total' => $effTotal
+        ]);
     }
 }

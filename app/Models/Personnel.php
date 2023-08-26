@@ -19,6 +19,7 @@ class Personnel extends Model
         'dateEmbauche',
         'adresse',
         'username',
+        'password',
         'password'
     ];
 

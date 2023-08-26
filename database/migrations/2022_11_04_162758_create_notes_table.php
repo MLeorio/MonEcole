@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->float('note')->nullable(false);
-            $table->enum('typeNote', ['Devoir', 'Interro', 'Composition']);
+            $table->enum('typeNote', ['Devoir', 'Interro', 'Composition'])->nullable(false);
+            $table->enum('periode', ['Trimestre 1','Trimestre 2','Trimestre 3','Semestre 1','Semestre 2'])->nullable(false);
+            $table->year('annee-scolaire')->default(date("Y"))->nullable(false);
 
             $table->foreignId('matiere_id')->constrained()->onDelete('cascade');
             $table->foreignId('eleve_id')->constrained()->onDelete('cascade');

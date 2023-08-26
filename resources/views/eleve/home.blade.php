@@ -8,6 +8,10 @@
     @include('eleve.nav-elev')
 @endsection
 
+@section('classe')
+    {{ Session()->get('classe')['libelle'] }}
+@endsection
+
 @section('mobile-menu')
     @include('eleve.mobile-menu-elev')
 @endsection
@@ -15,9 +19,7 @@
 @section('brand')
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <ul class="breadcome-menu">
-            <li><a href="#">Tableau de bord </a> <span class="bread-slash">/</span>
-            </li>
-            <li><span class="bread-blod"><strong>Accueil</strong></span>
+            <li><a href="{{ route('homeEle') }}">Accueil</a> <span class="bread-slash">></span>
             </li>
         </ul>
     </div>
@@ -31,14 +33,14 @@
                     <div class="analytics-sparkle-line reso-mg-b-30">
                         <div class="analytics-content">
                             <h5>&Eacute;ffectif de la classe</h5>
-                            <h2><span class="counter">50</span> <span class="tuition-fees"
+                            <h2><span class="counter">{{ $fille }}</span> <span class="tuition-fees"
                                     style="font-weight: bold; color:black; font-size:large">Filles</span>
                             </h2>
-                            <span class="text-success">62.5%</span>
+                            <span class="text-success">{{ ($fille / $total) * 100 }}%</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100" style="width:62.5%;">
-                                    <span class="sr-only">62.5% Complete</span>
+                                    aria-valuemin="0" aria-valuemax="100" style="width:{{ ($fille / $total) * 100 }}%;">
+                                    <span class="sr-only">{{ ($fille / $total) * 100 }}% Complete</span>
                                     <!-- Pourcentage des filles sur le total -->
                                 </div>
                             </div>
@@ -49,14 +51,14 @@
                     <div class="analytics-sparkle-line reso-mg-b-30">
                         <div class="analytics-content">
                             <h5>&Eacute;ffectif de la classe</h5>
-                            <h2><span class="counter">30</span> <span class="tuition-fees"
+                            <h2><span class="counter">{{ $garcon }}</span> <span class="tuition-fees"
                                     style="font-weight: bold; color:black; font-size:large">Gar&ccedil;ons</span>
                             </h2>
-                            <span class="text-danger">37.5%</span>
+                            <span class="text-danger">{{ ($garcon / $total) * 100 }}%</span>
                             <div class="progress m-b-0">
                                 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100" style="width:37.5%;">
-                                    <span class="sr-only">37.5% Complete</span>
+                                    aria-valuemin="0" aria-valuemax="100" style="width:{{ ($garcon / $total) * 100 }}%;">
+                                    <span class="sr-only">{{ ($garcon / $total) * 100 }}% Complete</span>
                                     <!-- Pourcentage des garcons sur le total -->
                                 </div>
                             </div>
@@ -67,14 +69,14 @@
                     <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
                         <div class="analytics-content">
                             <h5>&Eacute;ffectif total des &eacute;l&egrave;ves</h5>
-                            <h2><span class="counter">80</span> <span class="tuition-fees"
+                            <h2><span class="counter">{{ $total }}</span> <span class="tuition-fees"
                                     style="font-weight: bold; color:black; font-size:large">&Eacute;l&egrave;ves</span>
                             </h2>
                             <span class="text-info">----</span>
                             <div class="progress m-b-0">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
+                                <div class="progress-bar progress-bar-info" role="progressbar"
                                     aria-valuemin="0" aria-valuemax="100" style="width:100%;">
-                                    <span class="sr-only">10% Complete</span>
+                                    <span class="sr-only">100% Complete</span>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +88,7 @@
 
     <div class="product-sales-area mg-tb-30"></div>
 
-    <div class="traffic-analysis-area">
+    {{-- <div class="traffic-analysis-area">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -120,7 +122,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="library-book-area mg-t-30">
         <div class="container-fluid">

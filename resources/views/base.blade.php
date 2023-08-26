@@ -65,9 +65,18 @@
     <link rel="stylesheet" href="{{ asset('base/css/data-table/bootstrap-editable.css') }}">
 
 
+    <link rel="stylesheet" href="{{ asset('base/css/form/themesaller-forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('base/css/select2/select2.min.css') }}">
+
+
+    <link rel="stylesheet" href="{{ asset('base/css/form/all-type-forms.css') }}">
 
     <link rel="stylesheet" href="{{ asset('base/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('base/css/alerts.css') }}">
     <link rel="stylesheet" href="{{ asset('base/css/dropzone/dropzone.css') }}">
+
+
+    <link rel="stylesheet" href="{{ asset('base/css/chosen/bootstrap-chosen.css') }}">
 
     <!-- responsive CSS
   ============================================ -->
@@ -110,8 +119,7 @@
                                 <div class="row">
                                     <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
                                         <div class="menu-switcher-pro">
-                                            <button type="button" id="sidebarCollapse"
-                                                class="btn bar-button-pro
+                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro
                                                 header-drl-controller-btn btn-info navbar-btn">
                                                 <i class="educate-icon educate-nav"></i>
                                             </button>
@@ -125,22 +133,24 @@
                                             <ul class="nav navbar-nav mai-top-nav header-right-menu">
 
                                                 <li class="nav-item">
-                                                    <a href="#" data-toggle="dropdown" role="button"
-                                                        aria-expanded="false" class="nav-link dropdown-toggle">
+                                                    <strong class="admin-name">
+                                                        @yield('classe')
+                                                    </strong>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
                                                         <img src="img/product/pro4.jpg" alt="" />
                                                         <span class="admin-name">
-                                                            {{ Session::get('user')['prenom']}}
-                                                            {{ Session::get('user')['nom']}}
+                                                            {{ Session::get('user')['prenom'] }}
+                                                            {{ Session::get('user')['nom'] }}
                                                         </span>
                                                         <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                     </a>
-                                                    <ul role="menu"
-                                                        class="dropdown-header-top
+                                                    <ul role="menu" class="dropdown-header-top
                                                         author-log dropdown-menu animated zoomIn">
                                                         <li>
                                                             <a href="">
-                                                                <span
-                                                                    class="edu-icon edu-user-rounded
+                                                                <span class="edu-icon edu-user-rounded
                                                                     author-log-ic"></span>
                                                                 Mon Profile
                                                             </a>
@@ -285,13 +295,32 @@
         <script src="{{ asset('base/js/dropzone/dropzone.js') }}"></script>
 
 
+        <!-- select2 JS
+  ============================================ -->
+        <script src="{{ asset('base/js/select2/select2.full.min.js') }}"></script>
+        <script src="{{ asset('base/js/select2/select2-active.js') }}"></script>
+
         <script src="{{ asset('base/js/duallistbox/jquery.bootstrap-duallistbox.js') }}"></script>
         <script src="{{ asset('base/js/duallistbox/duallistbox.active.js') }}"></script>
+
+
+        <script src="{{ asset('base/js/chosen/chosen.jquery.js') }}"></script>
+        <script src="{{ asset('base/js/chosen/chosen-active.js') }}"></script>
+
+        <!-- ichecks JS
+  ============================================ -->
+        <script src="{{ asset('base/js/icheck/icheck.min.js') }}"></script>
+        <script src="{{ asset('base/js/icheck/icheck-active.js') }}"></script>
 
         <!-- main JS
             ============================================ -->
         <script src="{{ asset('base/js/main.js') }}"></script>
         <script src="{{ asset('base/js/tab.js') }}"></script>
+
+        <!-- peity JS
+		============================================ -->
+        <script src="{{ asset('base/js/peity/jquery.peity.min.js') }}"></script>
+        <script src="{{ asset('base/js/peity/peity-active.js') }}"></script>
 </body>
 
 </html>

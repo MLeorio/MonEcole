@@ -32,8 +32,8 @@ class Eleve extends Model
 
     public function classes()
     {
-        return $this->belongsToMany(Classe::class, 'eleve_classe')
-        ->using(EleveClasse::class)
+        return $this->belongsToMany(Classe::class, 'classe_eleves')
+        ->withPivot('annee-scolaire')
         ->withTimestamps();
     }
 }

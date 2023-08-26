@@ -4,8 +4,26 @@
     Mati&egrave;re ~ Liste des mati&egrave;res
 @endsection
 
+@section('brand')
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <ul class="breadcome-menu">
+            <li>
+                <a href="{{ route('homePers') }}">Accueil</a> <span class="bread-slash">></span>
+            </li>
+            <li>
+                <span class="bread-blod text-primary" style="font-weight: bold;">Liste des mati&egrave;ves</span>
+            </li>
+        </ul>
+    </div>
+@endsection
+
+
 @section('menu')
     @include('personnel.nav-pers')
+@endsection
+
+@section('mobile-menu')
+    @include('personnel.mob-nav-pers')
 @endsection
 
 @section('content')
@@ -20,14 +38,6 @@
                                 <h1>Liste <span class="table-project-n">des</span> Mati&egrave;res</h1>
                             </div>
                         </div>
-
-                        @if (Session::get('success'))
-                            <div class="row p-lg-4 bg-success" style="border-radius: 10px;
-                            font-size:large; margin:10px; padding:12px; justify-content:center; text-align:center">
-                                <p>{{ Session::get('success') }}</p>
-                            </div>
-                        @endif
-
                         <div class="sparkline13-graph">
                             <div class="datatable-dashv1-list custom-datatable-overright">
                                 <div id="toolbar">

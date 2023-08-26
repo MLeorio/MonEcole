@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('libelle')->unique()->nullable(false);
-            $table->enum('niveau', ['Primaire', 'College', 'Lycee'])->nullable(false);
+            $table->enum('niveau', ['Primaire', 'Collège', 'Lycée'])->nullable(false);
             $table->string('description');
             $table->timestamps();
         });

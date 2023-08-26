@@ -14,43 +14,36 @@
         <nav class="sidebar-nav left-sidebar-menu-pro" aria-label="">
             <ul class="metismenu" id="menu1">
 
+                {{-- Le lien de l'accueil --}}
                 <li class="{{ Request::is('professeur/dashboard') ? 'f-active' : '' }}">
                     <a title="Home" href="{{ route('homeProf') }}" aria-expanded="false">
                         <span class="educate-icon educate-home icon-wrap"></span>
                         <span
                             class="mini-click-non
-                        {{ Request::is('professeur/dashboard') ? 'pers' : '' }} ">Accueil</span>
+                            {{ Request::is('professeur/dashboard') ? 'pers' : '' }} ">Accueil</span>
                     </a>
                 </li>
 
-
-                <li class="{{ Request::is('professeur/dashboard/classe') ? 'f-active' : '' }}">
-                    <a title="Mes classes" href="{{ route('classe.index') }}" aria-expanded="false">
+                {{-- Le lien pour Classe --}}
+                <li class="{{ Request::is(['professeur/classe', 'professeur/classe/*']) ? 'f-active' : '' }}">
+                    <a title="Emploi du temps" href="{{ route('prof.classes') }}" aria-expanded="false">
                         <span class="educate-icon educate-department icon-wrap"></span>
-                        <span
-                            class="mini-click-non
-                        {{ Request::is('professeur/dashboard/classe') ? 'pers' : '' }} ">Mes
-                            classes</span>
-                    </a>
+                        <span class="mini-click-non {{ Request::is(['professeur/classe', 'professeur/classe/*']) ? 'pers' : '' }}">Mes Classes</span></a>
                 </li>
 
-                <li class="{{ Request::is('professeur/dashboard/eleve') ? 'f-active' : '' }}">
-                    <a title="Emploie du temps" href="" aria-expanded="false">
-                        <span class="educate-icon educate-event icon-wrap"></span>
-                        <span
-                            class="mini-click-non
-                        {{ Request::is('professeur/dashboard/eleve') ? 'pers' : '' }} ">Mon
-                            calendrier</span>
-                    </a>
-                </li>
-
+                {{-- Le lien pour calendrier --}}
                 <li>
-                    <a title="Home" href="{{ route('logout') }}" aria-expanded="false" style="color: red">
-                        <i class="fa fa-lock" aria-label="true"></i>
-                        <span class="mini-click-non" style="margin-left: 10px;font-size:18px">
-                            D&eacute;connexion
-                        </span>
-                    </a>
+                    <a title="Emploi du temps" href="" aria-expanded="false">
+                        <span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span>
+                        <span class="mini-click-non">Emploi du temps</span></a>
+                </li>
+
+                {{-- Le lien pour Deconnexion --}}
+                <li>
+                    <a title="Se d&eacute;connecter" href="" aria-expanded="false" style="color: red">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        <span class="mini-click-non" style="margin-left: 10px; font-size:18px">
+                            D&eacute;connexion</span></a>
                 </li>
             </ul>
         </nav>

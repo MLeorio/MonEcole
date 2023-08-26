@@ -48,7 +48,7 @@ class AuthController extends Controller
                 return back()->with('fail', 'Mot de passe est incorrect.');
             }
         } else {
-            return back()->with('fail', 'Utilisateur not trouvé.');
+            return back()->with('fail', 'Utilisateur non trouvé.');
         }
     }
 
@@ -71,7 +71,7 @@ class AuthController extends Controller
                 return back()->with('fail', 'Mot de passe est incorrect.');
             }
         } else {
-            return back()->with('fail', 'Utilisateur not trouvé.');
+            return back()->with('fail', 'Utilisateur non trouvé.');
         }
     }
 
@@ -87,13 +87,15 @@ class AuthController extends Controller
 
         if ($eleve) {
             if (Hash::check($request['pass'], $eleve['password'])) {
+                $classe = $eleve->classes()->where('annee-scolaire', date('Y'))->get()->first();
                 $request->session()->put('user', $eleve);
+                $request->session()->put('classe', $classe);
                 return redirect()->route('homeEle');
             } else {
                 return back()->with('fail', 'Mot de passe est incorrect.');
             }
         } else {
-            return back()->with('fail', 'Utilisateur not trouvé.');
+            return back()->with('fail', 'Utilisateur non trouvé.');
         }
     }
 

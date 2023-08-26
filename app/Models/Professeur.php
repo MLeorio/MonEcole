@@ -9,7 +9,6 @@ class Professeur extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'nom',
         'prenom',
@@ -38,7 +37,7 @@ class Professeur extends Model
     public function matieres()
     {
         return $this->belongsToMany(Matiere::class, 'enseigners')
-        ->withPivot('role', 'annee-scolaire')
+        ->withPivot('annee-scolaire')
         ->withTimestamps();
     }
 
