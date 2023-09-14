@@ -136,7 +136,7 @@
                                             @php
                                                 $n = 1;
                                             @endphp
-                                            @foreach ($classe->eleves as $eleve)
+                                            @foreach ($classe->eleves()->where('annee-scolaire', date('Y'))->get() as $eleve)
                                                 <tr>
                                                     <td></td>
                                                     <td>{{ $n }}</td>

@@ -2,7 +2,7 @@
     <div class="sidebar-header">
         <a href="{{ route('homeProf') }}">
             <!-- logo -->
-            <h1 style="padding: 20px; width:200px;" class="main-logo">Mon &Eacute;cole</h1>
+            <h1 style="padding: 20px; width:200px;" class="main-logo">SafeSchool</h1>
         </a>
         <strong>
             <a href="{{ route('homeProf') }}">

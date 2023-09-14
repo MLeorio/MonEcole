@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Personnel;
 
 use App\Http\Controllers\Controller;
+use App\Models\Classe;
 use App\Models\Eleve;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
@@ -16,10 +17,10 @@ class EleveController extends Controller
      */
     public function index()
     {
-        $alleleves = Eleve::all()->sortBy('nom');
+        $allStudents = Eleve::all()->sortBy('nom');
 
         return view('personnel.list-eleve', [
-            'eleves' => $alleleves
+            'eleves' => $allStudents
         ]);
     }
 
@@ -30,7 +31,11 @@ class EleveController extends Controller
      */
     public function create()
     {
-        return view('personnel.add-eleve');
+        $classes = Classe::all()->sortBy('libelle');
+
+        return view('personnel.add-eleve',[
+            'classes' => $classes
+        ]);
     }
 
     /**
@@ -48,10 +53,11 @@ class EleveController extends Controller
             'birthday' => 'bail|date|required',
             'adresse' => 'bail|string|required|max:100',
             'nation' => 'bail|string|required|max:50',
-            'dateEntree' => 'bail|date|required'
+            'dateEntree' => 'bail|date|required',
+            'classe' => 'bail|integer|required'
         ]);
-
-        $user = Personnel::where('id', Session()->get('user')['id'])->first();
+        
+        $user = Session()->get('user');
 
         #Persistance des donnes dans la base de donnes
         $eleve = new Eleve();
@@ -63,6 +69,8 @@ class EleveController extends Controller
         $eleve->adresse = $request->adresse;
         $eleve->nationalite = $request->nation;
         $eleve->dateEntree = $request->dateEntree;
+
+        #Generation du numero matricule a revoir !!!!
 
         $matricule = "";
         for ($i=0; $i < 3; $i++) {
@@ -78,8 +86,16 @@ class EleveController extends Controller
         $matricule = strtoupper($matricule . $birthAn . "-SC");
 
         $eleve->matricule = $matricule;
+        
+        if (isset($request['classe'])) {
+            $eleve->etat = 1;
+        }
 
         $user->eleves()->save($eleve);
+
+        $classe = Classe::find($request['classe']);
+
+        $eleve->classes()->attach($classe, ['annee-scolaire' => date('Y')]);
 
         return redirect()->back()->with('success', 'Eleve ajouté avec succès');
 

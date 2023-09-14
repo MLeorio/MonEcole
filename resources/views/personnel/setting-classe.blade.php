@@ -123,7 +123,8 @@
                                                     <div class="advanced-form-area mg-b-15">
                                                         <div class="container-fluid">
                                                             <div class="row">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+                                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                     <div
                                                                         class="sparkline10-list mg-tb-30
                                                                     responsive-mg-t-0
@@ -216,7 +217,8 @@
                                                     <div class="advanced-form-area mg-b-15">
                                                         <div class="container-fluid">
                                                             <div class="row">
-                                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+                                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                     <div
                                                                         class="sparkline10-list mg-tb-30
                                                                     responsive-mg-t-0 table-mg-t-pro-n dk-res-t-pro-0 nk-ds-n-pro-t-0">
@@ -250,7 +252,8 @@
                                                                                                 <select
                                                                                                     data-placeholder="Mati&egrave;res"
                                                                                                     class="chosen-select"
-                                                                                                    name="matiere" required>
+                                                                                                    name="matiere"
+                                                                                                    required>
 
                                                                                                     <option>
 
@@ -309,9 +312,13 @@
                                                                                             <div
                                                                                                 class="bt-df-checkbox pull-left">
                                                                                                 <label>
-                                                                                                    <input class="pull-left" type="checkbox" name='role'
-                                                                                                    style="margin-right: 15px; margin-left:10px">
-                                                                                                    est titulaire de la classe
+                                                                                                    <input
+                                                                                                        class="pull-left"
+                                                                                                        type="checkbox"
+                                                                                                        name='role'
+                                                                                                        style="margin-right: 15px; margin-left:10px">
+                                                                                                    est titulaire de la
+                                                                                                    classe
                                                                                                 </label>
 
                                                                                                 @error('role')
@@ -404,29 +411,43 @@
                                                                                 </div>
 
                                                                                 <div class="form-group">
-                                                                                    <select name="niveau" class="form-control" required>
-                                                                                        <option value="" selected="" disabled="">
+                                                                                    <select name="niveau"
+                                                                                        class="form-control" required>
+                                                                                        <option value=""
+                                                                                            selected="" disabled="">
                                                                                             Choisir le niveau</option>
                                                                                         @if ($classe['niveau'] == 'Primaire')
-                                                                                        <option value="Primaire" selected >Primaire</option>
-                                                                                        <option value="Collège">Coll&egrave;ge</option>
-                                                                                        <option value="Lycée">Lyc&eacute;e</option>
-                                                                                        @elseif ($classe['niveau'] == 'Collège')
-                                                                                        <option value="Primaire">Primaire</option>
-                                                                                        <option value="Collège" selected>Coll&egrave;ge</option>
-                                                                                        <option value="Lycée">Lyc&eacute;e</option>
-                                                                                        @elseif ($classe['niveau'] == 'Lycée')
-                                                                                        <option value="Primaire">Primaire</option>
-                                                                                        <option value="Collège">Coll&egrave;ge</option>
-                                                                                        <option value="Lycée" selected>Lyc&eacute;e</option>
+                                                                                            <option value="Primaire"
+                                                                                                selected>Primaire</option>
+                                                                                            <option value="Collège">
+                                                                                                Coll&egrave;ge</option>
+                                                                                            <option value="Lycée">
+                                                                                                Lyc&eacute;e</option>
+                                                                                            @elseif ($classe['niveau'] == 'Collège')
+                                                                                            <option value="Primaire">
+                                                                                                Primaire</option>
+                                                                                            <option value="Collège"
+                                                                                                selected>Coll&egrave;ge
+                                                                                            </option>
+                                                                                            <option value="Lycée">
+                                                                                                Lyc&eacute;e</option>
+                                                                                            @elseif ($classe['niveau'] == 'Lycée')
+                                                                                            <option value="Primaire">
+                                                                                                Primaire</option>
+                                                                                            <option value="Collège">
+                                                                                                Coll&egrave;ge</option>
+                                                                                            <option value="Lycée"
+                                                                                                selected>Lyc&eacute;e
+                                                                                            </option>
                                                                                         @endif
                                                                                     </select>
                                                                                 </div>
-                        
-                                                                                @error("niveau")
-                                                                                <div style="color: red; font-size:14px; padding:8px;">
-                                                                                    * {{ $message }}
-                                                                                </div>
+
+                                                                                @error('niveau')
+                                                                                    <div
+                                                                                        style="color: red; font-size:14px; padding:8px;">
+                                                                                        * {{ $message }}
+                                                                                    </div>
                                                                                 @enderror
 
                                                                             </div>

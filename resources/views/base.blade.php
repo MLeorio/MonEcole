@@ -104,7 +104,7 @@
                     <div class="logo-pro">
                         <a href="">
                             <!-- Logo de l'ecole -->
-                            <h1 class="main-logo" style="padding: 10px;">Mon &Eacute;cole</h1>
+                            <h1 class="main-logo" style="padding: 10px;">Safe School</h1>
                         </a>
                     </div>
                 </div>

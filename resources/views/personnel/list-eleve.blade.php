@@ -31,7 +31,7 @@ Eleves ~ Liste des eleves
     <div class="container-fluid">
         <div class="row">
             @forelse ($eleves as $eleve)
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mg-b-30">
                 <div class="student-inner-std mg-t-30 res-mg-b-30" style="border-top: 1px solid rgba(95, 90, 90, 0.233);
                             border-left: 1px solid rgb(95, 90, 90, 0.233);
                             border-right: 1px solid rgb(95, 90, 90, 0.233);
@@ -40,15 +40,15 @@ Eleves ~ Liste des eleves
                             box-sizing:border-box;">
                     <div class="student-img">
                         @if ($eleve->genre == 'Masculin')
-                        <img src="{{ asset('base/img/hom.png') }}" alt="" />
+                        <img src="{{ asset('base/img/hom.png') }}" width="100" height="100" alt="" />
                         @else
                         <img src="{{ asset('base/img/fem.png') }}" alt="" />
                         @endif
                     </div>
                     <a href="{{ route('eleve.voir', ['eleve' => $eleve]) }}">
                         <div class="student-dtl" style="background-color: #00FFFF;
-                                border-radius: 0 0 15px 15px">
-                            <h2>{{ $eleve['prenom'] }} <span style="text-decoration: uppercase">{{ $eleve['nom'] }}</span></h2>
+                                border-radius: 0 0 15px 15px;">
+                            <h5>{{ $eleve['prenom'] }} <span style="text-decoration: uppercase">{{ $eleve['nom'] }}</span></h5>
                             <p class="dp" style="font-weight: 600;color:brown;">
                                 {{ $eleve->matricule }}
                             </p>
@@ -58,10 +58,6 @@ Eleves ~ Liste des eleves
                             $auj = date('Y');
                             @endphp
 
-                            <p class="dp-ag">
-                                {{-- Age: <strong>{{ $auj - $dt[0] }} ans</strong> --}}
-                                <strong style="font-size: 18px; color:blue">{{ $eleve->adresse }}</strong>
-                            </p>
                         </div>
                     </a>
                 </div>

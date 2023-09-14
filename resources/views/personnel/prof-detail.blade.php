@@ -19,11 +19,12 @@
                 <a href="{{ route('homePers') }}">Accueil</a> <span class="bread-slash">></span>
             </li>
             <li>
-                <a href="{{ route('eleve.list') }}" style="font-weight:500">
+                <a href="{{ route('professeur.list') }}" style="font-weight:500">
                     Liste des profs </a> <span class="bread-slash">></span>
             </li>
             <li>
-                <span class="bread-blod text-primary" style="font-weight: bold;">{{ $prof['prenom'] }} {{ $prof['nom'] }}</span>
+                <span class="bread-blod text-primary" style="font-weight: bold;">{{ $prof['prenom'] }}
+                    {{ $prof['nom'] }}</span>
             </li>
         </ul>
     </div>
@@ -190,6 +191,22 @@
                                                             D&eacute;tail sur le prof, les classes dans lesquelles il
                                                             intervient et les mati&egrave;s correspondantes...
                                                         </p>
+
+                                                        <p>
+                                                            @foreach ($prof->classes()->where('annee-scolaire', date('Y'))->get() as $classe)
+                                                                {{ $classe['libelle'] }}
+                                                                @if ( $classe->pivot['role'] == "Titulaire")
+                                                                ({{ $classe->pivot['role'] }})
+                                                                @endif
+
+                                                                @foreach ($classe->matieres()->where('professeur_id', $prof['id'])->get() as $matiere)
+                                                                {{ $matiere['libelle'] }}
+                                                                @endforeach
+                                                                <br>
+
+
+                                                            @endforeach
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -203,10 +220,11 @@
 
                             <div class="product-tab-list tab-pane fade" id="INFORMATION">
                                 <div class="row">
-                                    
+
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="review-content-section">
-                                            <form action="{{ route('professeur.maj', ['prof' => $prof]) }}" method="POST">
+                                            <form action="{{ route('professeur.maj', ['prof' => $prof]) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('put')
                                                 <div class="row">
@@ -216,9 +234,9 @@
                                                                 placeholder="Votre Nom" value="{{ $prof->nom }}"
                                                                 required>
                                                             @error('nom')
-                                                            <div style="color: red; font-size:14px; padding:8px;">
-                                                                * {{ $message }}
-                                                            </div>
+                                                                <div style="color: red; font-size:14px; padding:8px;">
+                                                                    * {{ $message }}
+                                                                </div>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
@@ -226,18 +244,18 @@
                                                                 placeholder="Pr&eacute;nom" value="{{ $prof->prenom }}"
                                                                 required>
                                                             @error('prenom')
-                                                            <div style="color: red; font-size:14px; padding:8px;">
-                                                                * {{ $message }}
-                                                            </div>
+                                                                <div style="color: red; font-size:14px; padding:8px;">
+                                                                    * {{ $message }}
+                                                                </div>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
                                                             <input type="email" name="email" class="form-control"
                                                                 placeholder="Email" value="{{ $prof->email }}" required>
                                                             @error('email')
-                                                            <div style="color: red; font-size:14px; padding:8px;">
-                                                                * {{ $message }}
-                                                            </div>
+                                                                <div style="color: red; font-size:14px; padding:8px;">
+                                                                    * {{ $message }}
+                                                                </div>
                                                             @enderror
                                                         </div>
 
@@ -246,9 +264,9 @@
                                                                 placeholder="Num&eacute;ro" value="{{ $prof->numero }}"
                                                                 required>
                                                             @error('numero')
-                                                            <div style="color: red; font-size:14px; padding:8px;">
-                                                                * {{ $message }}
-                                                            </div>
+                                                                <div style="color: red; font-size:14px; padding:8px;">
+                                                                    * {{ $message }}
+                                                                </div>
                                                             @enderror
                                                         </div>
 
@@ -257,9 +275,9 @@
                                                                 placeholder="Nationalit&eacute;"
                                                                 value="{{ $prof->nationalite }}" required>
                                                             @error('nationalite')
-                                                            <div style="color: red; font-size:14px; padding:8px;">
-                                                                * {{ $message }}
-                                                            </div>
+                                                                <div style="color: red; font-size:14px; padding:8px;">
+                                                                    * {{ $message }}
+                                                                </div>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -270,9 +288,9 @@
                                                                 placeholder="Date de naissance (aaaa/mm/jj)"
                                                                 value="{{ $prof->birthday }}">
                                                             @error('birthday')
-                                                            <div style="color: red; font-size:14px; padding:8px;">
-                                                                * {{ $message }}
-                                                            </div>
+                                                                <div style="color: red; font-size:14px; padding:8px;">
+                                                                    * {{ $message }}
+                                                                </div>
                                                             @enderror
                                                         </div>
 
@@ -282,9 +300,9 @@
                                                                 placeholder="Date d'Embauche (aaaa/mm/jj)"
                                                                 value="{{ $prof->dateEmbauche }}">
                                                             @error('dateEmbauche')
-                                                            <div style="color: red; font-size:14px; padding:8px;">
-                                                                * {{ $message }}
-                                                            </div>
+                                                                <div style="color: red; font-size:14px; padding:8px;">
+                                                                    * {{ $message }}
+                                                                </div>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
@@ -305,9 +323,9 @@
                                                                 @endif
                                                             </select>
                                                             @error('gender')
-                                                            <div style="color: red; font-size:14px; padding:8px;">
-                                                                * {{ $message }}
-                                                            </div>
+                                                                <div style="color: red; font-size:14px; padding:8px;">
+                                                                    * {{ $message }}
+                                                                </div>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
@@ -315,9 +333,9 @@
                                                                 placeholder="Sp&eacute;cialit&eacute;"
                                                                 value="{{ $prof->specialite }}">
                                                             @error('specialite')
-                                                            <div style="color: red; font-size:14px; padding:8px;">
-                                                                * {{ $message }}
-                                                            </div>
+                                                                <div style="color: red; font-size:14px; padding:8px;">
+                                                                    * {{ $message }}
+                                                                </div>
                                                             @enderror
                                                         </div>
 
@@ -325,9 +343,9 @@
                                                             <input type="text" class="form-control" name="adresse"
                                                                 placeholder="Adresse" value="{{ $prof->adresse }}">
                                                             @error('adresse')
-                                                            <div style="color: red; font-size:14px; padding:8px;">
-                                                                * {{ $message }}
-                                                            </div>
+                                                                <div style="color: red; font-size:14px; padding:8px;">
+                                                                    * {{ $message }}
+                                                                </div>
                                                             @enderror
                                                         </div>
                                                     </div>
@@ -341,9 +359,9 @@
                                                                         name="username" placeholder="Nom d'utilisateur"
                                                                         value="{{ $prof->username }}">
                                                                     @error('username')
-                                                                    <div style="color: red; font-size:14px; padding:8px;">
-                                                                        * {{ $message }}
-                                                                    </div>
+                                                                        <div style="color: red; font-size:14px; padding:8px;">
+                                                                            * {{ $message }}
+                                                                        </div>
                                                                     @enderror
                                                                 </div>
                                                             </div>

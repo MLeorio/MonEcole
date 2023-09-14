@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-Ajouter un &eacute;l&egrave;ve
+    Ajouter un &eacute;l&egrave;ve
 @endsection
 
 @section('brand')
@@ -66,9 +66,10 @@ Ajouter un &eacute;l&egrave;ve
                                                     class="add-professors" id="demo1-upload">
                                                     @csrf
                                                     <div class="row">
-                                                        <div class="col-lg-2"></div>
-                                                        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                                                        <div class="col-lg-8 col-md-12 col-sm-8 col-xs-12">
                                                             <div class="form-group">
+                                                                <label for="">Nom de l'&eacute;l&egrave;ve</label>
                                                                 <input name="name" type="text" class="form-control"
                                                                     placeholder="Nom" value="{{ old('name') }}" required>
 
@@ -79,6 +80,7 @@ Ajouter un &eacute;l&egrave;ve
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group">
+                                                                <label for="">Pr&eacute;noms de l'&eacute;l&egrave;ve</label>
                                                                 <input name="lastname" type="text" class="form-control"
                                                                     placeholder="Pr&eacute;nom(s)"
                                                                     value="{{ old('lastname') }}" required>
@@ -90,6 +92,7 @@ Ajouter un &eacute;l&egrave;ve
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Nationalit&eacute; de l'&eacute;l&egrave;ve</label>
                                                                 <input name="nation" type="text" class="form-control"
                                                                     placeholder="Nationalit&eacute;"
                                                                     value="{{ old('nation') }}" required>
@@ -101,6 +104,7 @@ Ajouter un &eacute;l&egrave;ve
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Adresse de l'&eacute;l&egrave;ve</label>
                                                                 <input name="adresse" type="text" class="form-control"
                                                                     placeholder="Adresse" value="{{ old('adresse') }}"
                                                                     required>
@@ -112,6 +116,7 @@ Ajouter un &eacute;l&egrave;ve
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Date de naissance</label>
                                                                 <input name="birthday" id="finish" type="date"
                                                                     class="form-control" title="Date de naissance"
                                                                     value="{{ old('birthday') }}" required>
@@ -123,6 +128,7 @@ Ajouter un &eacute;l&egrave;ve
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Date d'entr&eacute;e dans l'&eacute;tablissement</label>
                                                                 <input name="dateEntree" id="finish" type="date"
                                                                     class="form-control" title="Date d'inscription"
                                                                     value="{{ old('dateEntree') }}" required>
@@ -134,6 +140,7 @@ Ajouter un &eacute;l&egrave;ve
                                                                 @enderror
                                                             </div>
                                                             <div class="form-group">
+                                                                <label>Genre de l'&eacute;l&egrave;ve</label>
                                                                 <select name="gender" class="form-control" required>
                                                                     <option value="none" selected disabled>
                                                                         Choisir le genre</option>
@@ -147,6 +154,30 @@ Ajouter un &eacute;l&egrave;ve
                                                                     </div>
                                                                 @enderror
                                                             </div>
+
+                                                            <hr>
+
+                                                            <div class="chosen-select-single">
+                                                                <label>Choisir une classe</label>
+                                                                <select data-placeholder="Classe" class="chosen-select" name="classe" required>
+                                                                    <option></option>
+                                                                    
+                                                                    @foreach ($classes as $classe)
+                                                                        <option value="{{ $classe['id'] }}">
+                                                                            {{ $classe['libelle'] }}
+                                                                        </option>
+                                                                    @endforeach
+
+                                                                </select>
+
+                                                                @error('classe')
+                                                                    <div style="color: red; font-size:14px; padding:8px;">
+                                                                        * {{ $message }}
+                                                                    </div>
+                                                                @enderror
+                                                            </div>
+
+
                                                         </div>
                                                     </div>
                                                     <div class="row">

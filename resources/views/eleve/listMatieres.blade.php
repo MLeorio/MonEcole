@@ -57,7 +57,8 @@
                 @empty
                     <strong>
                         <center style="margin: 50px; font-size:32px; color:blue">
-                            Aucune mati&egrave;re encore enregistr&eacute;e !</center>
+                            Aucune mati&egrave;re encore programm&eacute;e !
+                        </center>
                     </strong>
                 @endforelse
             </div>

@@ -81,7 +81,7 @@ class ClasseController extends Controller
      */
     public function edit(Classe $classe)
     {
-        $eleves = Eleve::all()->sort();
+        $eleves = Eleve::where('etat', 0)->get()->sort();
         $profs = Professeur::all()->sort();
         $matieres = Matiere::all();
 
@@ -138,6 +138,9 @@ class ClasseController extends Controller
         $eleve = Eleve::findorFail($request['eleve']);
 
         $classe->eleves()->attach($eleve, ['annee-scolaire' => date('Y')]);
+        $eleve->unpdate([
+            'etat' => 1
+        ]);
         
         return redirect()->back()->with('success', 'Admission éffectuée avec succès !');
     }
